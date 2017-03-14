@@ -35,7 +35,7 @@ class Comment_model extends CI_Model {
         $this->comment_timestamp = time();
         $this->comment_user      = $this->session->userdata('userid');
 
-        return $this->db->update('blog_comments', $this, array('comment_id' => $_POST['id']));
+        return $this->db->update('blog_comments', $this, array('comment_id' => $_POST['comment_id']));
     }
 
 }

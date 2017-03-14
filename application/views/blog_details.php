@@ -52,6 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<?php if(!$isupdate): ?>
 	<div class='well'>
 		<div class='row'>
+			<h3>Comments: </h3>
 			<?php echo validation_errors(); ?>
 			<?php echo form_open('blog/add_comment/'. $details->blog_id, array('class'=> 'form-horizontal')); ?>
 				<div class="form-group">
@@ -78,8 +79,23 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<?php if(isset($comment) && count($comment) > 0) :?>
 		<?php foreach($comment as $com): ?>
 			<div class="row">
-				<h4><?php echo $com->comment_title .' by '. $com->fullname;?> <?php echo ($details->blog_owner == $userid) ? anchor('blog/delete_comment/'. $details->blog_id .'/'.$com->comment_id, '<span style="align: right" class="glyphicon glyphicon-trash"></span>', array('class="btn btn-info')) : '';  ?></h4>
-				<h5><?php echo $com->comment_details;?></h5>
+
+				<h4>
+					<?php echo $com->comment_title .' by '. $com->fullname;?> 
+					<?php echo ($com->comment_user == $userid) ? anchor('blog/delete_comment/'. $details->blog_id .'/'.$com->comment_id, '<span style="align: right" class="glyphicon glyphicon-trash"></span>', array('class="btn btn-info')) : '';  ?>
+				</h4>
+				<h5>
+					<?php if($com->comment_user == $userid): ?>
+						<?php echo form_open('blog/update_comment/'. $details->blog_id, array('class'=> 'form-horizontal')); ?>
+						<textarea col="20" name="comment"><?=$com->comment_details?></textarea>
+						<input type="hidden" name="title" value="<?=$com->comment_title?>">
+						<input type="hidden" name="comment_id" value="<?=$com->comment_id?>">
+						<button type="submit" class="btn btn-primary">Update</button>
+						</form>
+					<?php else: ?>
+						<?=$com->comment_details;?>
+					<?php endif;?>
+				</h5>
 			</div>
 		<?php endforeach;?>
 		<?php endif;?>

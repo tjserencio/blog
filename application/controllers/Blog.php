@@ -53,9 +53,16 @@ var_dump($isSuccess);
 
 	public function add_comment()
 	{
-		$isSuccess = $this->Comment_model->insert_entry();
+		$this->Comment_model->insert_entry();
 
 		redirect('blog/details/' . $_POST['blog_id']);
+	}
+
+	public function update_comment($blog_id)
+	{
+		$this->Comment_model->update_entry();
+
+		redirect('blog/details/' . $blog_id);
 	}
 
 	public function delete_comment($blog_id = null, $comment_id = null)
