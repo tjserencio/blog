@@ -38,8 +38,8 @@ class Blog extends CI_Controller {
 
 	public function update_entry()
 	{
-		$isSuccess = $this->Blog_model->update_entry();
-var_dump($isSuccess);
+		$this->Blog_model->update_entry();
+
 		redirect('blog/details/' . $_POST['blog_id']);
 	}
 
