@@ -14,10 +14,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div class="container">
 	<div class="well">
 		<div class="row">
-			<?php if($details->blog_owner == $userid && !$isupdate): ?>
-				<?php echo anchor('blog/details/'. $details->blog_id .'/true', '<span style="align: right" class="glyphicon glyphicon-pencil"></span>', array('class="btn btn-info'));  ?>
-				<?php echo anchor('blog/delete_entry/'. $details->blog_id, '<span style="align: right" class="glyphicon glyphicon-trash"></span>', array('class="btn btn-info'));  ?>
-			<?php endif;?>
 			<?php if($isupdate): ?>
 				<?php echo validation_errors(); ?>
 				<?php echo form_open('blog/update_entry', array('class'=> 'form-horizontal')); ?>
@@ -42,7 +38,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 				</form>
 			<?php else: ?>
-			<h1><?=$details->blog_title;?></h1>
+			<h1>
+				<?=$details->blog_title;?>
+				<?php if($details->blog_owner == $userid && !$isupdate): ?>
+					<?php echo anchor('blog/details/'. $details->blog_id .'/true', '<span style="float: right" class="glyphicon glyphicon-pencil"></span>', array('class="btn btn-info'));  ?>
+					<?php echo anchor('blog/delete_entry/'. $details->blog_id, '<span style="float: right" class="glyphicon glyphicon-trash"></span>', array('class="btn btn-info'));  ?>
+				<?php endif;?>
+			</h1>
 			<p><?=$details->blog_description; ?></p>
 			<?php endif;?>
 		</div>
