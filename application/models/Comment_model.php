@@ -11,7 +11,11 @@ class Comment_model extends CI_Model {
 
     public function get_last_ten_entries($blog_id)
     {
-    	$query = $this->db->query("SELECT * FROM blog_comments INNER JOIN users ON comment_user = user_id ORDER BY comment_timestamp DESC");
+    	$query = $this->db->query("SELECT * 
+                                    FROM blog_comments
+                                    INNER JOIN users ON comment_user = user_id
+                                    WHERE blog_id = '". $blog_id."'
+                                    ORDER BY comment_timestamp DESC");
 
         return ($query->num_rows() > 0) ? $query->result() : null;
     }
@@ -29,7 +33,7 @@ class Comment_model extends CI_Model {
 
     public function update_entry()
     {
-    	$this->blog_id           = $blog_id;
+    	$this->blog_id           = $_POST['blog_id'];
         $this->comment_title     = $_POST['title']; // please read the below note
         $this->comment_details   = $_POST['comment'];
         $this->comment_timestamp = time();

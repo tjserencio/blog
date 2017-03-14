@@ -90,6 +90,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<textarea col="20" name="comment"><?=$com->comment_details?></textarea>
 						<input type="hidden" name="title" value="<?=$com->comment_title?>">
 						<input type="hidden" name="comment_id" value="<?=$com->comment_id?>">
+						<input type="hidden" name="blog_id" value="<?=$com->blog_id?>">
 						<button type="submit" class="btn btn-primary">Update</button>
 						</form>
 					<?php else: ?>
