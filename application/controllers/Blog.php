@@ -39,8 +39,16 @@ class Blog extends CI_Controller {
 	public function update_entry()
 	{
 		$isSuccess = $this->Blog_model->update_entry();
-
+var_dump($isSuccess);
 		redirect('blog/details/' . $_POST['blog_id']);
+	}
+
+	public function delete_entry($blog_id = null)
+	{
+		if($blog_id == null) redirect('blog');
+
+		$this->db->delete('blog_post', array('blog_id' => $blog_id));
+		redirect('/blog');
 	}
 
 	public function add_comment()
@@ -48,6 +56,14 @@ class Blog extends CI_Controller {
 		$isSuccess = $this->Comment_model->insert_entry();
 
 		redirect('blog/details/' . $_POST['blog_id']);
+	}
+
+	public function delete_comment($blog_id = null, $comment_id = null)
+	{
+		if($blog_id == null) redirect('blog');
+
+		$this->db->delete('blog_comments', array('comment_id' => $comment_id));
+		redirect('/blog/details/'. $blog_id);
 	}
 
 	public function details($blog_id = null, $isupdate = false)

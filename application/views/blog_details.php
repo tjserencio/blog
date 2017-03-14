@@ -16,6 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<div class="row">
 			<?php if($details->blog_owner == $userid && !$isupdate): ?>
 				<?php echo anchor('blog/details/'. $details->blog_id .'/true', '<span style="align: right" class="glyphicon glyphicon-pencil"></span>', array('class="btn btn-info'));  ?>
+				<?php echo anchor('blog/delete_entry/'. $details->blog_id, '<span style="align: right" class="glyphicon glyphicon-trash"></span>', array('class="btn btn-info'));  ?>
 			<?php endif;?>
 			<?php if($isupdate): ?>
 				<?php echo validation_errors(); ?>
@@ -75,7 +76,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<?php if(isset($comment) && count($comment) > 0) :?>
 		<?php foreach($comment as $com): ?>
 			<div class="row">
-				<h4><?php echo $com->comment_title .' by '. $com->fullname;?></h4>
+				<h4><?php echo $com->comment_title .' by '. $com->fullname;?> <?php echo ($details->blog_owner == $userid) ? anchor('blog/delete_comment/'. $details->blog_id .'/'.$com->comment_id, '<span style="align: right" class="glyphicon glyphicon-trash"></span>', array('class="btn btn-info')) : '';  ?></h4>
 				<h5><?php echo $com->comment_details;?></h5>
 			</div>
 		<?php endforeach;?>

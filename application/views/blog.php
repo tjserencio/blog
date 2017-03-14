@@ -14,6 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <div class="container">
 	<div class="well">
 		<div class="row">
+			<h2>Create blog :</h2>
 			<?php echo validation_errors(); ?>
 			<?php echo form_open('blog/add_entry', array('class'=> 'form-horizontal')); ?>
 				<div class="form-group">

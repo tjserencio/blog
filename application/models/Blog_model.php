@@ -39,7 +39,7 @@ class Blog_model extends CI_Model {
         $this->blog_timestamp   = time();
         $this->blog_owner       = $this->session->userdata('userid');
 
-        return $this->db->update('blog_post', $this, array('blog_id' => $_POST['id']));
+        return $this->db->update('blog_post', $this, array('blog_id' => $_POST['blog_id']));
     }
 
 }
