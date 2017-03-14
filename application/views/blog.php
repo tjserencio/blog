@@ -33,7 +33,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						<button type="submit" class="btn btn-primary">Submit</button>
 					</div>
 				</div>
-
 			</form>
 
 		</div>

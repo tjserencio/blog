@@ -21,6 +21,9 @@ class Blog extends CI_Controller {
 	public function index()
 	{
 		$userid = $this->session->userdata('userid');
+
+		if(!$userid) redirect('welcome');
+
 		$blogs  = $this->Blog_model->get_last_ten_entries();
 
 		$this->load->view('blog', array('blog' => $blogs));
@@ -30,17 +33,35 @@ class Blog extends CI_Controller {
 	{
 		$isSuccess = $this->Blog_model->insert_entry();
 
-		if($isSuccess) {
-			$this->index();
-		}
+		if($isSuccess) $this->index();
 	}
 
-	public function details($blog_id = null)
+	public function update_entry()
+	{
+		$isSuccess = $this->Blog_model->update_entry();
+
+		redirect('blog/details/' . $_POST['blog_id']);
+	}
+
+	public function add_comment()
+	{
+		$isSuccess = $this->Comment_model->insert_entry();
+
+		redirect('blog/details/' . $_POST['blog_id']);
+	}
+
+	public function details($blog_id = null, $isupdate = false)
 	{
 		if($blog_id == null) redirect('blog');
 
-		$query = $this->Blog_model->get_details($blog_id);
+		$query  = $this->Blog_model->get_details($blog_id);
+		$comment = $this->Comment_model->get_last_ten_entries($blog_id);
+		$userid = $this->session->userdata('userid');
 
-		$this->load->view('blog_details', array('details' => $query));
+		$this->load->view('blog_details', array(
+											'details'  => $query,
+											'comment'  => $comment,
+											'userid'   => $userid,
+											'isupdate' => $isupdate));
 	}
 }

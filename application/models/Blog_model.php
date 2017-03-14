@@ -18,6 +18,7 @@ class Blog_model extends CI_Model {
 
     public function get_last_ten_entries()
     {
+    	$this->db->where('blog_owner', $this->session->userdata('userid'));
         return $this->db->get('blog_post', 10)->result();
     }
 

@@ -15,9 +15,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div class="well">
 		<?php echo validation_errors(); ?>
 		<?php echo form_open('welcome/register/true', array('class'=> 'form-horizontal')); ?>
-			<?php if(isset($error)) :?>
-				<p><?=$error;?></p>
-			<?php endif;?>
 			<div class="form-group">
 				<label class="control-label col-sm-2">Name: </label>
 				<div class="col-sm-10">
